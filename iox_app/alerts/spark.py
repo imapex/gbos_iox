@@ -38,7 +38,7 @@ class SparkRoomAlert(GenericAlertClass):
 
         # Create the payload value that includes the paramters that we need to pass to the Tropo API
 
-        payload = {'roomId': self.roomId, 'text': text}
+        payload = {'roomId': self.roomId, 'markdown': text}
 
         if self.log:
             logging.warning("API Call to: " + apistring)

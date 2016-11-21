@@ -1,6 +1,7 @@
 from sensors.base import GenericSensorClass
 import serial
 import logging
+import json
 
 class MotionArduino(GenericSensorClass):
 
@@ -35,12 +36,9 @@ class MotionArduino(GenericSensorClass):
             if self._log:
                 logging.warning("Incoming Data Found")
 
-            value = self.sdev.readline()[:-2]
+            value = json.loads(self.sdev.readline()[:-2])
 
-            if value == "Motion 1 Active":
-                current_active = True
-            elif value == "Motion 1 Inactive":
-                current_active = False
+            current_active = value["Value"]
 
             self.data = value
 

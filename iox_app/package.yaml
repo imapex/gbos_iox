@@ -1,0 +1,33 @@
+descriptor-schema-version: "2.0"
+ 
+info:
+  name: gbos_iox
+  description: "Monitor and report Giant Ball of String Activity through Arduino Interface"
+  version: "0.1"
+  author-link: "http://imapex.io"
+  author-name: "imapex"
+ 
+app:
+  # Indicate app type (vm, paas, lxc etc.,)
+  type: paas
+ 
+  resources:
+    profile: c1.small
+
+    network:
+      - 
+        interface-name: eth0
+        ports: 
+            tcp: [6000]
+    devices:
+      -
+        type: serial
+        label: HOST_DEV1
+        usage: Integrating with Arduino
+
+  # Specify runtime and startup
+  startup:
+    runtime: python 
+    runtime-version: 2.7.3
+    target: main.py
+

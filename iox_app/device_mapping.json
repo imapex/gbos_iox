@@ -1,0 +1,21 @@
+{
+  "resources": {
+    "cpu": "25", 
+    "devices": [
+      {
+        "device-id": "/dev/cpts0", 
+        "label": "HOST_DEV1", 
+        "type": "serial"
+      }
+    ], 
+    "disk": "100", 
+    "memory": "50", 
+    "network": [
+      {
+        "interface-name": "eth0", 
+        "network-name": "iox-bridge0"
+      }
+    ], 
+    "profile": "custom"
+  }
+}

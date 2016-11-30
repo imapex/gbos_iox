@@ -4,3 +4,4 @@ package_config.ini
 IOTEventNotification-master/
 *.pem
 package.tar
+*.pyc

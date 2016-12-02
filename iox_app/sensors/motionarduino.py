@@ -36,7 +36,9 @@ class MotionArduino(GenericSensorClass):
             if self._log:
                 logging.warning("Incoming Data Found")
 
-            value = json.loads(self.sdev.readline()[:-2])
+            inc = self.sdev.readline()[:-2]
+            # print(inc)
+            value = json.loads(inc)
 
             current_active = value["Value"]
 

@@ -4,6 +4,7 @@ import os
 import time
 from alerts.spark import SparkRoomAlert
 from alerts.local import PrintAlertClass
+from alerts.ciscozeus import CiscoZeusAlert
 from sensors.motionarduino import MotionArduino
 from ConfigParser import SafeConfigParser
 
@@ -32,7 +33,7 @@ def set_alerts(sensor):
         sensor.add_alert(screen)
         cancontinue = True
 
-    # This code will instantiate the Tropo Alert Class - Check to see if it is enabled
+    # This code will instantiate the Spark Alert Class - Check to see if it is enabled
     if (cfg.get("spark", "enabled") == "True"):
         print "Spark Alert Enabled for output..."
         spark = SparkRoomAlert(cfg)
@@ -41,6 +42,17 @@ def set_alerts(sensor):
             spark.log = True
 
         sensor.add_alert(spark)
+        cancontinue = True
+
+    # This code will instantiate the Cisco Zeus Alert Class - Check to see if it is enabled
+    if (cfg.get("zeus", "enabled") == "True"):
+        print "Zeus Alert Enabled for output..."
+        zeus_client = CiscoZeusAlert(cfg)
+
+        if (cfg.get("zeus", "logging") == "True"):
+            zeus_client.log = True
+
+        sensor.add_alert(zeus_client)
         cancontinue = True
 
     return cancontinue

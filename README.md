@@ -21,6 +21,8 @@ This repository and README provide details on setting up just the gbos_iox code 
 * [gbos_demo](https://github.com/imapex/gbos_demo) - Full Demo Application Setup and Details
 * [gbos_iox](https://github.com/imapex/gbos_iox) - Details on the Cisco IOx Client Application 
 * [gbos_arduino](https://github.com/imapex/gbos_arduino) - Details on the Arduino Microcontroller Code 
+* [gbos_kiosk](https://github.com/imapex/gbos_kiosk) - Details on the Welcome Web Portal Page
+* [gbos_tropo](https://github.com/imapex/gbos_tropo) - Details on the Tropo Service for SMS based communication with visitors
 
 ---
 
@@ -36,7 +38,7 @@ This repository provides the code and details for the Cisco IOx Application that
 
 # Setup and PreRequisites 
 
-To build and replicate this demonstraiton you'll need access to an IOx device with a Serial Port, and a compatible Arduino device.  The original demonstration was created using a **Cisco C819HG-4G-G-K9** router and an **Arduino UNO**, however other models of each could be used.  
+To build and replicate this demonstration you'll need access to an IOx device with a Serial Port, and a compatible Arduino device.  The original demonstration was created using a **Cisco C819HG-4G-G-K9** router and an **Arduino UNO**, however other models of each could be used.  
 
 ## IOx Router/Host 
 
@@ -74,6 +76,20 @@ If you use a Female DB25 interface, the pins that you'll need are:
 * **Pin 2 - Receive** connected to **RS232 Shifter Pin 2: Tx**
 * **Pin 3 - Transmit** connected to **RS232 Shifter Pin 3: Rx** 
 * **Pin 7 - Ground** connected to **RS232 Shifter Pin 5: Ground**
+
+## Alerting Options 
+
+Notifications and alerts of activity can be sent and recorded using Cisco Spark and/or Cisco Zeus.  The recommendation is to leverage both alerting options to hightlight real-time (Spark) and historical (Zeus) within the demonstration.  
+
+You'll need to have accounts with the services you plan to use.  
+
+### Cisco Spark 
+
+Visit [CiscoSpark.com](http://ciscospark.com) to register for an account.  This takes only a few minutes to complete.  
+
+### Cisco Zeus 
+
+Visist [CiscoZeus.io](https://ciscozeus.io) to register for an account.  This process can take a few days to complete.    
 
 # Loading Demo Application
 
@@ -136,6 +152,14 @@ logging: False
 url: https://api.ciscospark.com
 token: <spark token>                    <-- Provide a Spark Token for Alerts to be sent from
 room_id: <spark room id>                <-- Provide a Spark RoomID for Alerts to be sent to
+
+[zeus]
+enabled: True
+logging: False
+url: http://api.ciscozeus.io            <-- Verify that this API url with Zeus
+token: <zeus token>                     <-- Provide a Zeus Token
+log_name: <log name>                    <-- What Log Name to post to (alpha numeric)
+log_key: <log key>                      <-- What Log Key for alerts (alpha numeric)
 
 [motionsensor]
 compare_data: 0

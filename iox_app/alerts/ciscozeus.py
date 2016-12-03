@@ -45,7 +45,11 @@ class CiscoZeusAlert(GenericAlertClass):
             logging.warning("   Payload: "+ str(payload))
 
         # Post the log to Zeus
-        resp = self.client.sendLog(self.logName, payload)
+        try:
+            resp = self.client.sendLog(self.logName, payload)
+        except:
+            # if fails, try once more
+            resp = self.client.sendLog(self.logName, payload)
 
         message_dict = {}
         message_dict['statuscode'] = str(resp[0])

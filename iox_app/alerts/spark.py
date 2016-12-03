@@ -46,8 +46,13 @@ class SparkRoomAlert(GenericAlertClass):
             logging.warning("   Payload: "+ str(payload))
 
         # Post the API call to the tropo API using the payload and headers defined above
-        resp = requests.post(apistring,
-                             json=payload, headers=headers)
+        try:
+            resp = requests.post(apistring,
+                                 json=payload, headers=headers)
+        except requests.exceptions.ConnectionError:
+            # try it again to get around temporary DNS resolution
+            resp = requests.post(apistring,
+                                 json=payload, headers=headers)
 
         message_dict = json.loads(resp.text)
         message_dict['statuscode'] = str(resp.status_code)
